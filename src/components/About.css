@@ -64,4 +64,29 @@
   .feature-item {
     font-size: 1rem;
   }
+
+  .about-more {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.feature-detail {
+  margin-bottom: 1.5rem;
+}
+
+.feature-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.feature-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #555;
+}
+
 }

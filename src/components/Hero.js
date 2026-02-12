@@ -3,7 +3,7 @@ import './Hero.css';
 
 function Hero() {
   const handleCTA = () => {
-    const contactSection = document.getElementById('contact');
+    const contactSection = document.getElementById('about');
     if (contactSection) {
       contactSection.scrollIntoView({ behavior: 'smooth' });
     }
