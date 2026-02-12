@@ -1,0 +1,119 @@
+.research-section {
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+}
+
+.research-card {
+  background: white;
+  border-radius: 8px;
+  padding: 30px;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  cursor: pointer;
+  border-top: 4px solid #3b82f6;
+}
+
+.research-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.research-card.color-ai {
+  border-top-color: #8b5cf6;
+}
+
+.research-card.color-bio {
+  border-top-color: #10b981;
+}
+
+.research-card.color-quantum {
+  border-top-color: #f97316;
+}
+
+.research-card.color-energy {
+  border-top-color: #06b6d4;
+}
+
+.research-card.color-nano {
+  border-top-color: #ec4899;
+}
+
+.research-card.color-cyber {
+  border-top-color: #ef4444;
+}
+
+.research-icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease;
+}
+
+.research-card:hover .research-icon {
+  transform: rotate(10deg) scale(1.1);
+}
+
+.research-card.color-ai .research-icon {
+  color: #8b5cf6;
+}
+
+.research-card.color-bio .research-icon {
+  color: #10b981;
+}
+
+.research-card.color-quantum .research-icon {
+  color: #f97316;
+}
+
+.research-card.color-energy .research-icon {
+  color: #06b6d4;
+}
+
+.research-card.color-nano .research-icon {
+  color: #ec4899;
+}
+
+.research-card.color-cyber .research-icon {
+  color: #ef4444;
+}
+
+.research-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #1f2937;
+}
+
+.research-description {
+  font-size: 1rem;
+  color: #6b7280;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.research-link {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.research-link:hover {
+  color: #1e40af;
+  transform: translateX(5px);
+}
+
+@media (max-width: 768px) {
+  .research-card {
+    padding: 25px;
+  }
+
+  .research-icon {
+    font-size: 2.5rem;
+  }
+
+  .research-title {
+    font-size: 1.3rem;
+  }
+}
