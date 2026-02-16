@@ -27,33 +27,68 @@ function Header() {
         </button>
         <div className={`collapse navbar-collapse ${isMenuOpen ? 'show' : ''}`}>
           <ul className="navbar-nav ms-auto">
+            {/* Home link */}
             <li className="nav-item">
               <a
                 className="nav-link"
-                onClick={() => handleScroll('about')}
+                onClick={() => handleScroll('hero')}
+                href="#hero"
+              >
+                Home
+              </a>
+            </li>
+
+            {/* Dropdown for About */}
+            <li className="nav-item dropdown">
+              <a
+                className="nav-link dropdown-toggle"
                 href="#about"
+                id="aboutDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
               >
-                About
+                Our Work
               </a>
+              <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="aboutDropdown">
+                <li>
+                  <a
+                    className="dropdown-item"
+                    onClick={() => handleScroll('about')}
+                    href="#about"
+                  >
+                    About
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="dropdown-item"
+                    onClick={() => handleScroll('research')}
+                    href="#research"
+                  >
+                    Research
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="dropdown-item"
+                    onClick={() => handleScroll('team')}
+                    href="#team"
+                  >
+                    Team
+                  </a>
+                </li>
+              </ul>
             </li>
+            {/* Users */}
             <li className="nav-item">
-              <a
-                className="nav-link"
-                onClick={() => handleScroll('research')}
-                href="#research"
+              <a className="nav-link" onClick={() => handleScroll('users')}
+                href="#users"
               >
-                Research
+                Users
               </a>
             </li>
-            <li className="nav-item">
-              <a
-                className="nav-link"
-                onClick={() => handleScroll('team')}
-                href="#team"
-              >
-                Team
-              </a>
-            </li>
+            {/* Contact remains separate */}
             <li className="nav-item">
               <a
                 className="nav-link"

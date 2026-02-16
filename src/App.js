@@ -7,6 +7,7 @@ import Research from './components/Research';
 import Team from './components/Team';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import Users from './components/Users';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Hero />
       <About />
       <Research />
+      <Users />
       <Team />
       <Contact />
       <Footer />
