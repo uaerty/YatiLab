@@ -9,6 +9,9 @@ function Contact() {
     message: ''
   });
 
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -17,17 +20,35 @@ function Contact() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-    alert('Thank you for your message! We will get back to you soon.');
-    setFormData({
-      name: '',
-      email: '',
-      subject: '',
-      message: ''
-    });
+    setError(null);
+    setSuccess(null);
+
+    try {
+      const response = await fetch('http://localhost:8080/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit contact form');
+      }
+
+      setSuccess('Thank you for your message! We will get back to you soon.');
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+      });
+    } catch (err) {
+      setError('There was an error submitting your message. Please try again later.');
+      console.error(err);
+    }
   };
 
   return (
@@ -46,6 +67,7 @@ function Contact() {
         <div className="row">
           <div className="col-lg-8 mx-auto">
             <div className="contact-wrapper">
+              {/* Contact Info */}
               <div className="row">
                 <div className="col-md-6 mb-4">
                   <div className="contact-info-item">
@@ -67,6 +89,7 @@ function Contact() {
                 </div>
               </div>
 
+              {/* Contact Form */}
               <form className="contact-form" onSubmit={handleSubmit}>
                 <div className="row">
                   <div className="col-md-6 mb-3">
@@ -118,6 +141,10 @@ function Contact() {
                   Send Message <i className="fas fa-paper-plane ms-2"></i>
                 </button>
               </form>
+
+              {/* Success/Error Notifications */}
+              {success && <div className="alert alert-success mt-3">{success}</div>}
+              {error && <div className="alert alert-danger mt-3">{error}</div>}
             </div>
           </div>
         </div>
