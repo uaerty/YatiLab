@@ -25,31 +25,48 @@ function Contact() {
     setError(null);
     setSuccess(null);
 
-    try {
-      const response = await fetch('http://localhost:8080/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+    try { // Step 1: Authenticate and get JWT 
+    const authResponse = await fetch('http://localhost:8080/api/auth/login', { 
+      method: 'POST', 
+      headers: { 'Content-Type': 'application/json', }, 
+      body: JSON.stringify({ 
+        username: 'testuser', // replace with actual username
+        password: 'testpass' // replace with actual password 
+      }), }); 
+      if (!authResponse.ok) 
+        { throw new Error('Authentication failed'); } 
+      // If backend returns raw token string: 
+      const token = await authResponse.text();
+
+      // Step 2: Store token in cookie 
+      document.cookie = `jwt=${token}; path=/; secure; samesite=strict`; 
+      
+      // Step 3: Use token in Authorization header 
+      const response = await fetch('http://localhost:8080/api/contact', { 
+        method: 'POST', 
+        headers: { 
+          'Content-Type': 'application/json', 
+          'Authorization': `Bearer ${token}` 
         },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to submit contact form');
-      }
-
-      setSuccess('Thank you for your message! We will get back to you soon.');
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-      });
-    } catch (err) {
-      setError('There was an error submitting your message. Please try again later.');
-      console.error(err);
-    }
-  };
+         body: JSON.stringify(formData), 
+        }); 
+        
+        if (!response.ok) { 
+          throw new Error('Failed to submit contact form'); 
+        } 
+        
+        setSuccess('Thank you for your message! We will get back to you soon.'); 
+        setFormData({ 
+          name: '',
+           email: '', 
+           subject: '',
+            message: '' 
+          }); 
+        } catch (err) { 
+          setError('There was an error submitting your message. Please try again later.');
+           console.error(err); 
+          } 
+        };
 
   return (
     <section id="contact" className="contact-section section-padding">
