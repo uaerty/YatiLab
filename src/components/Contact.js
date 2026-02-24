@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './Contact.css';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL;
+
 function Contact() {
   const [formData, setFormData] = useState({
     name: '',
@@ -26,7 +28,7 @@ function Contact() {
     setSuccess(null);
 
     try { // Step 1: Authenticate and get JWT 
-    const authResponse = await fetch('http://localhost:8080/api/auth/login', { 
+    const authResponse = await fetch(`${API_BASE_URL}/api/auth/login`, { 
       method: 'POST', 
       headers: { 'Content-Type': 'application/json', }, 
       body: JSON.stringify({ 
@@ -42,7 +44,7 @@ function Contact() {
       document.cookie = `jwt=${token}; path=/; secure; samesite=strict`; 
       
       // Step 3: Use token in Authorization header 
-      const response = await fetch('http://localhost:8080/api/contact', { 
+      const response = await fetch(`${API_BASE_URL}/api/contact`, { 
         method: 'POST', 
         headers: { 
           'Content-Type': 'application/json', 
