@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Yati R&D Lab Website
 
 A responsive, modern single-page application (SPA) for Yati R&D Lab, built with React and Bootstrap.
@@ -171,12 +171,4 @@ For inquiries or collaboration:
 - Phone: +1 (555) 123-4567
 - Location: Research Park, Innovation Hub, Tech City
 
----
 
-**Created by**: Senior Web Developer  
-**Date**: February 2026  
-**Technology Stack**: React + Bootstrap 5
-=======
-# YatiLab
-A single-page frontend application developed with React and Bootstrap to demonstrate component-based architecture, responsive layout design, and interactive user interface development.
->>>>>>> f4ac1990f4053841b749f3d924986f1d5119e89b
