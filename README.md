@@ -84,6 +84,23 @@ Execute the test suite:
 npm test
 ```
 
+## 🐳 Docker Support 
+You can also build and run the application using Docker. 
+## Build Docker Image From the project root directory: 
+```bash
+docker build -t yatis-react-app .
+```
+## Run Docker container 
+```bash
+docker run -d -p 3000:80 --name react-app yatis-react-app
+```
+## Stop and Remove container 
+```bash
+docker stop react-app
+docker rm react-app
+
+```
+
 ## 📱 Responsive Breakpoints
 
 The website is optimized for:
