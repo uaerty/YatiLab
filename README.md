@@ -86,20 +86,24 @@ npm test
 
 ## 🐳 Docker Support 
 You can also build and run the application using Docker. 
-## Build Docker Image From the project root directory: 
+### Build Docker Image From the project root directory: 
 ```bash
 docker build -t yatis-react-app .
 ```
-## Run Docker container 
+### Run Docker container 
 ```bash
 docker run -d -p 3000:80 --name react-app yatis-react-app
 ```
-## Stop and Remove container 
+### Stop and Remove container 
 ```bash
 docker stop react-app
 docker rm react-app
 
 ```
+## ⚙️ Backend Setup
+This React frontend communicates with the YatiLab backend service.
+To run the backend, please follow the instructions provided here:
+### 👉 YatiLab Backend Repository https://github.com/uaerty/YatiLab-Backend
 
 ## 📱 Responsive Breakpoints
 
