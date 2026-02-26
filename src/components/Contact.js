@@ -4,71 +4,46 @@ import './Contact.css';
 const API_BASE_URL = process.env.REACT_APP_API_URL;
 
 function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
-
+  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError(null);
-    setSuccess(null);
+  e.preventDefault();
+  setError(null);
+  setSuccess(null);
 
-    try { // Step 1: Authenticate and get JWT 
-    const authResponse = await fetch(`${API_BASE_URL}/api/auth/login`, { 
-      method: 'POST', 
-      headers: { 'Content-Type': 'application/json', }, 
-      body: JSON.stringify({ 
-        username: 'testuser', // replace with actual username
-        password: 'testpass' // replace with actual password 
-      }), }); 
-      if (!authResponse.ok) 
-        { throw new Error('Authentication failed'); } 
-      // If backend returns raw token string: 
-      const token = await authResponse.text();
+  try {
+    const token = localStorage.getItem("jwt");
+    if (!token) {
+      throw new Error("You must be logged in to send a message.");
+    }
 
-      // Step 2: Store token in cookie 
-      document.cookie = `jwt=${token}; path=/; secure; samesite=strict`; 
-      
-      // Step 3: Use token in Authorization header 
-      const response = await fetch(`${API_BASE_URL}/api/contact`, { 
-        method: 'POST', 
-        headers: { 
-          'Content-Type': 'application/json', 
-          'Authorization': `Bearer ${token}` 
-        },
-         body: JSON.stringify(formData), 
-        }); 
-        
-        if (!response.ok) { 
-          throw new Error('Failed to submit contact form'); 
-        } 
-        
-        setSuccess('Thank you for your message! We will get back to you soon.'); 
-        setFormData({ 
-          name: '',
-           email: '', 
-           subject: '',
-            message: '' 
-          }); 
-        } catch (err) { 
-          setError('There was an error submitting your message. Please try again later.');
-           console.error(err); 
-          } 
-        };
+    const response = await fetch(`${API_BASE_URL}/api/contact`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(formData),
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(errorMessage || 'Failed to submit contact form');
+    }
+
+    setSuccess('Thank you for your message! We will get back to you soon.');
+    setFormData({ name: '', email: '', subject: '', message: '' });
+  } catch (err) {
+    setError(err.message || 'There was an error submitting your message. Please try again later.');
+    console.error(err);
+  }
+};
 
   return (
     <section id="contact" className="contact-section section-padding">

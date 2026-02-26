@@ -13,29 +13,30 @@ const Login = ({ setIsAuthenticated }) => {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setMessage(null);
+  e.preventDefault();
+  setMessage(null);
 
-    try {
-      const response = await axios.post(`${API_BASE_URL}/api/auth/login`, {
-        username,
-        password,
-      });
+  try {
+    const response = await axios.post(`${API_BASE_URL}/api/auth/login`, {
+      username,
+      password,
+    });
 
-      if (response.status === 200) {
-        const token = response.data.token; // backend should return JWT
-        localStorage.setItem("jwt", token); // store token
-        setIsAuthenticated(true);
-        setMessage("Login successful!");
-        setMessageType("success");
-        navigate("/app");
-      }
-    } catch (error) {
-      setMessage("You are not registered. Please register.");
-      setMessageType("danger");
-      navigate("/register");
+    if (response.status === 200) {
+      // backend should return { token: "..." }
+      const token = response.data.token || response.data;
+      localStorage.setItem("jwt", token);
+      setIsAuthenticated(true);
+      setMessage("Login successful!");
+      setMessageType("success");
+      navigate("/app");
     }
-  };
+  } catch (error) {
+    setMessage(error.response?.data || "Login failed.");
+    setMessageType("danger");
+  }
+};
+
 
   return (
     <div className="login-container">

@@ -21,34 +21,52 @@ const Register = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (
-      !formData.username ||
-      !formData.password ||
-      !formData.repeatPassword ||
-      !formData.email ||
-      !formData.department
-    ) {
-      setMessage("All fields are required.");
-      setMessageType("danger");
-      return;
-    }
-    if (formData.password !== formData.repeatPassword) {
-      setMessage("Passwords do not match.");
-      setMessageType("danger");
-      return;
-    }
+  if (
+    !formData.username ||
+    !formData.password ||
+    !formData.repeatPassword ||
+    !formData.email ||
+    !formData.department
+  ) {
+    setMessage("All fields are required.");
+    setMessageType("danger");
+    return;
+  }
+  if (formData.password !== formData.repeatPassword) {
+    setMessage("Passwords do not match.");
+    setMessageType("danger");
+    return;
+  }
 
-    try {
-      const response = await axios.post(`${API_BASE_URL}/api/auth/register`, formData);
-      setMessage(response.data.message || "Registration successful!");
-      setMessageType("success");
-    } catch (error) {
-      setMessage(error.response?.data?.message || "Registration failed.");
-      setMessageType("danger");
-    }
-  };
+  try {
+    // Build payload without repeatPassword
+    const payload = {
+      username: formData.username,
+      password: formData.password,
+      email: formData.email,
+      department: formData.department,
+    };
+
+    const response = await axios.post(`${API_BASE_URL}/api/auth/register`, payload);
+
+    setMessage(response.data || "Registration successful!");
+    setMessageType("success");
+    // Optionally reset form
+    setFormData({
+      username: "",
+      password: "",
+      repeatPassword: "",
+      email: "",
+      department: "",
+    });
+  } catch (error) {
+    setMessage(error.response?.data || "Registration failed.");
+    setMessageType("danger");
+  }
+};
+
 
   return (
     <div className="register-container">

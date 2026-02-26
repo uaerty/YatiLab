@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Header.css';
+import { Link } from "react-router-dom";
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,6 +11,11 @@ function Header() {
       element.scrollIntoView({ behavior: 'smooth' });
     }
     setIsMenuOpen(false);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("jwt");
+    window.location.href = "/";
   };
 
   return (
@@ -96,6 +102,11 @@ function Header() {
                 href="#contact"
               >
                 Contact
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" onClick={handleLogout}>
+                Logout
               </a>
             </li>
           </ul>
