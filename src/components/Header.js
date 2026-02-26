@@ -104,9 +104,9 @@ function Header() {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" onClick={handleLogout}>
+              <button className="nav-link btn btn-link" onClick={handleLogout}>
                 Logout
-              </a>
+              </button>
             </li>
           </ul>
         </div>
